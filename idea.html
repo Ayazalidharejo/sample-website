@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Karvaan Tours — Private Door-to-Door Japan Tours</title>
+<meta name="description" content="Private door-to-door tours across Tokyo, Mount Fuji, Hakone, Nikko, Gotemba and Nagano. Premium vehicles, English-speaking guides." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#0B6E4F;
+    --accent:#F59E0B;
+    --muted:#6B7280;
+    --card:#ffffff;
+    --bg:#f7fafc;
+    --shadow: 0 6px 18px rgba(15,23,42,0.08);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:#041324;line-height:1.45}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1200px;margin:0 auto;padding:24px}
+  header{background:#fff;position:sticky;top:0;z-index:50;border-bottom:1px solid #E6E9EE;box-shadow:0 2px 4px rgba(0,0,0,0.02)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 24px;max-width:1200px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:18px;color:var(--primary);white-space:nowrap}
+  .brand img{height:40px;width:auto;display:block}
+  nav ul{display:flex;gap:8px;list-style:none;margin:0;padding:0;flex-wrap:wrap;align-items:center}
+  nav a{padding:8px 12px;border-radius:8px;color:#0B2A1E;font-weight:600;font-size:14px;transition:background 0.2s}
+  nav a:hover{background:rgba(11,110,79,0.08)}
+  .cta{background:var(--primary);color:#fff;padding:10px 18px;border-radius:10px;font-weight:700;white-space:nowrap;transition:background 0.2s}
+  .cta:hover{background:#095a42}
+  .hero{background-image:linear-gradient(to bottom right, rgba(11,110,79,0.06), rgba(5,20,36,0.02));padding:40px 0}
+  .hero-grid{display:flex;gap:24px;align-items:center}
+  .hero-left{flex:1}
+  .hero h1{font-size:34px;margin:0 0 12px}
+  .hero p{color:var(--muted);margin:0 0 18px}
+  .btns{display:flex;gap:12px}
+  .btn{padding:12px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+  .btn.primary{background:var(--primary);color:#fff}
+  .btn.outline{background:transparent;border:1px solid rgba(6,21,16,0.08);color:var(--primary)}
+  .hero-right{flex:1;display:flex;justify-content:center}
+  .hero-img{width:100%;max-width:520px;border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+  /* Search bar */
+  .search-bar{background:#fff;padding:14px;border-radius:12px;box-shadow:var(--shadow);margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+  .search-field{flex:1;min-width:160px}
+  select,input[type="text"],input[type="date"],input[type="time"],textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #E6E9EE;background:transparent;font-family:inherit;font-size:14px}
+  select:focus,input:focus,textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(11,110,79,0.1)}
+  label{display:block;margin-bottom:6px;font-weight:600;font-size:14px}
+  .search-btn{background:var(--accent);color:#fff;padding:10px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+  /* Tours list */
+  .section-title{display:flex;align-items:flex-start;justify-content:space-between;margin:28px 0 18px;gap:16px;flex-wrap:wrap}
+  .section-title h2{margin:0;font-size:28px;color:#041324}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--card);padding:0;border-radius:12px;box-shadow:var(--shadow);overflow:hidden;transition:transform 0.2s,box-shadow 0.2s}
+  .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,23,42,0.12)}
+  .card img{width:100%;height:180px;object-fit:cover;display:block}
+  .card-content{padding:14px}
+  .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:#EEF6F1;color:var(--primary);font-weight:700;margin-top:8px;font-size:12px}
+  .card h3{margin:10px 0 6px;font-size:16px;line-height:1.3}
+  .meta{display:flex;gap:12px;color:var(--muted);font-size:13px;flex-wrap:wrap}
+  .card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px}
+  .price{font-weight:800;color:var(--primary)}
+  .view-btn{background:transparent;border:1px solid #E6E9EE;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+  /* Sidebar filters layout for tours page */
+  .page{display:flex;gap:24px}
+  .filters{width:280px;background:#fff;padding:14px;border-radius:12px;box-shadow:var(--shadow);height:max-content;position:sticky;top:84px}
+  .filters h4{margin:0 0 8px;font-size:15px}
+  .filter-group{margin-bottom:12px}
+  .checkbox-list{display:flex;flex-direction:column;gap:6px}
+  label.small{font-size:14px;color:#0B2A1E}
+  /* Responsive */
+  @media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:28px}.filters{display:none;}}
+  @media(max-width:700px){
+    .hero-grid{flex-direction:column}
+    .grid{grid-template-columns:1fr}
+    nav ul{display:none}
+    .container{padding:16px}
+    .nav-inner{padding:12px 16px}
+    .section-title{flex-direction:column;align-items:flex-start}
+  }
+  /* Vehicles */
+  .vehicles{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:18px}
+  .vcard{background:#fff;padding:16px;border-radius:12px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:center;transition:transform 0.2s,box-shadow 0.2s}
+  .vcard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,23,42,0.12)}
+  .vcard img{width:120px;height:80px;object-fit:cover;border-radius:8px;flex-shrink:0}
+  .vcard > div{flex:1;min-width:0}
+  @media(max-width:1000px){.vehicles{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:700px){.vehicles{grid-template-columns:1fr}.vcard{flex-direction:column;text-align:center}.vcard img{width:100%;height:120px}}
+  /* Attractions */
+  .attractions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+  .attr-card{background:#fff;padding:0;border-radius:12px;box-shadow:var(--shadow);overflow:hidden;transition:transform 0.2s,box-shadow 0.2s}
+  .attr-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,23,42,0.12)}
+  .attr-card img{width:100%;height:200px;object-fit:cover;display:block;background:#f0f0f0}
+  .attr-card-content{padding:14px}
+  @media(max-width:1000px){.attractions-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:700px){.attractions-grid{grid-template-columns:1fr}}
+  /* Reservation Form */
+  .form-card{background:#fff;padding:24px;border-radius:12px;box-shadow:var(--shadow);max-width:900px;margin:18px auto 0}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .full{grid-column:1 / -1}
+  .form-grid > div{display:flex;flex-direction:column}
+  .submit{background:var(--primary);color:#fff;padding:12px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:800}
+  /* small UI */
+  .muted{color:var(--muted);font-size:13px}
+  .badge{background:#F0FDF4;color:#065F46;padding:6px 8px;border-radius:8px;font-weight:700;font-size:13px}
+  /* modal */
+  .modal{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;z-index:200}
+  .modal.show{display:flex}
+  .modal-box{background:#fff;border-radius:12px;padding:18px;max-width:920px;width:96%;box-shadow:var(--shadow)}
+  .close-btn{background:#eee;border:0;padding:8px 10px;border-radius:8px;cursor:pointer}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav-inner">
+    <div class="brand">
+      <img src="https://images.unsplash.com/photo-1549693578-d683be217e58?w=48&h=40&fit=crop&auto=format" alt="logo">
+      <span>Karvaan Tours</span>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#tours">Tours</a></li>
+        <li><a href="#attractions">Attractions</a></li>
+        <li><a href="#areas">Service Areas</a></li>
+        <li><a href="#vehicles">Vehicles</a></li>
+        <li><a href="#reservation">Online Reservation</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <a class="cta" href="#reservation">Reserve Now</a>
+    </div>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-left">
+        <h1>Private, Door-to-Door Japan Tours — Tokyo, Mount Fuji & More</h1>
+        <p>Luxury private tours with English-speaking drivers, premium vehicles, and flexible itineraries. Explore Tokyo, Mount Fuji, Hakone, Nikko, Gotemba, and Nagano.</p>
+        <div class="btns">
+          <button class="btn primary" onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth'})">Book Now</button>
+          <button class="btn outline" onclick="document.getElementById('tours').scrollIntoView({behavior:'smooth'})">Explore Tours</button>
+        </div>
+
+        <div class="search-bar" style="margin-top:18px;">
+          <div class="search-field">
+            <select id="filter-area">
+              <option value="">All Areas</option>
+              <option value="Tokyo">Tokyo</option>
+              <option value="MountFuji">Mount Fuji</option>
+              <option value="Hakone">Hakone</option>
+              <option value="Nikko">Nikko</option>
+              <option value="Gotemba">Gotemba</option>
+              <option value="Nagano">Nagano</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <select id="filter-attraction">
+              <option value="">All Attractions</option>
+              <option value="Shibuya">Shibuya Crossing</option>
+              <option value="MountFuji5">Mount Fuji 5th Station</option>
+              <option value="LakeAsh">Lake Ashi</option>
+              <option value="Toshogu">Toshogu Shrine</option>
+              <option value="GotembaOutlet">Gotemba Outlets</option>
+              <option value="SnowMonkey">Snow Monkey Park</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <select id="filter-service">
+              <option value="">All Service Types</option>
+              <option value="FullDay">Full Day</option>
+              <option value="HalfDay">Half Day</option>
+              <option value="Private">Private</option>
+              <option value="Luxury">Luxury</option>
+              <option value="Seasonal">Seasonal</option>
+              <option value="Airport">Airport Pickup</option>
+              <option value="City">City Tour</option>
+              <option value="DayTrip">Day Trip</option>
+              <option value="Night">Night Tour</option>
+            </select>
+          </div>
+          <div>
+            <button class="search-btn" id="searchBtn">Search</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-img">
+          <img src="https://images.unsplash.com/photo-1549693578-d683be217e58?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=97f2b9a4ad0d9a3b8b0ef2d1e5f03e2f" alt="Mount Fuji" style="width:100%;display:block">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container" id="tours">
+    <div class="section-title">
+      <h2>Explore Our Tours</h2>
+      <div class="muted">Filter tours by area, attraction or service type. Click a tour to view details & book.</div>
+    </div>
+
+    <div class="page">
+      <!-- Filters (visible on desktop) -->
+      <aside class="filters" aria-label="Filters">
+        <div class="filter-group">
+          <h4>Area</h4>
+          <div class="checkbox-list">
+            <label class="small"><input type="checkbox" class="area-checkbox" value="Tokyo"> Tokyo</label>
+            <label class="small"><input type="checkbox" class="area-checkbox" value="MountFuji"> Mount Fuji</label>
+            <label class="small"><input type="checkbox" class="area-checkbox" value="Hakone"> Hakone</label>
+            <label class="small"><input type="checkbox" class="area-checkbox" value="Nikko"> Nikko</label>
+            <label class="small"><input type="checkbox" class="area-checkbox" value="Gotemba"> Gotemba</label>
+            <label class="small"><input type="checkbox" class="area-checkbox" value="Nagano"> Nagano</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Attractions</h4>
+          <div class="checkbox-list">
+            <label class="small"><input type="checkbox" class="attraction-checkbox" value="Shibuya"> Shibuya Crossing</label>
+            <label class="small"><input type="checkbox" class="attraction-checkbox" value="Skytree"> Tokyo Skytree</label>
+            <label class="small"><input type="checkbox" class="attraction-checkbox" value="MountFuji5"> Mount Fuji 5th Station</label>
+            <label class="small"><input type="checkbox" class="attraction-checkbox" value="LakeKawaguchi"> Lake Kawaguchiko</label>
+            <label class="small"><input type="checkbox" class="attraction-checkbox" value="LakeAsh"> Lake Ashi</label>
+            <label class="small"><input type="checkbox" class="attraction-checkbox" value="SnowMonkey"> Snow Monkey Park</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Service Type</h4>
+          <div class="checkbox-list">
+            <label class="small"><input type="checkbox" class="service-checkbox" value="FullDay"> Full Day</label>
+            <label class="small"><input type="checkbox" class="service-checkbox" value="HalfDay"> Half Day</label>
+            <label class="small"><input type="checkbox" class="service-checkbox" value="Private"> Private</label>
+            <label class="small"><input type="checkbox" class="service-checkbox" value="Luxury"> Luxury</label>
+            <label class="small"><input type="checkbox" class="service-checkbox" value="Airport"> Airport Pickup</label>
+            <label class="small"><input type="checkbox" class="service-checkbox" value="Night"> Night Tour</label>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <button class="btn outline" onclick="resetFilters()">Reset</button>
+        </div>
+      </aside>
+
+      <!-- Tours grid -->
+      <section style="flex:1">
+        <div class="grid" id="toursGrid">
+
+          <!-- TOKYO -->
+          <article class="card tour-card" data-area="Tokyo" data-attractions="Shibuya,Skytree" data-service="FullDay,City">
+            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=04e9b6e9f4bb6a3eb6e2b6a4f2f2a9b0" alt="Tokyo Highlights">
+            <div class="card-content">
+              <span class="tag">Tokyo</span>
+              <h3>Tokyo City Highlights Tour</h3>
+              <div class="meta">Full Day · Family · English Guide</div>
+              <div class="card-footer">
+                <div class="price">From ¥25,000</div>
+                <div>
+                  <button class="view-btn" onclick="openModal('Tokyo City Highlights Tour','This full-day tour covers Shibuya Crossing, Asakusa, Meiji Shrine and Tokyo Skytree. Includes private vehicle, English guide, and door-to-door pickup.')">View Details</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tour-card" data-area="Tokyo" data-attractions="Meiji,Imperial" data-service="HalfDay,City">
+            <img src="https://images.unsplash.com/photo-1549693578-d683be217e58?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=97f2b9a4ad0d9a3b8b0ef2d1e5f03e2f" alt="Tokyo Cultural">
+            <div class="card-content">
+              <span class="tag">Tokyo</span>
+              <h3>Tokyo Cultural & Heritage Tour</h3>
+              <div class="meta">Half Day · Culture · English Guide</div>
+              <div class="card-footer">
+                <div class="price">From ¥15,000</div>
+                <div><button class="view-btn" onclick="openModal('Tokyo Cultural & Heritage Tour','Visit Meiji Shrine, Imperial Palace, Ueno Park and historical spots. Private pickup & guide.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tour-card" data-area="Tokyo" data-attractions="Odaiba,Akihabara" data-service="HalfDay,Private">
+            <img src="https://images.unsplash.com/photo-1526481280698-0b1f809f2b6a?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=1f9c1f39d6f2f8f3dde8c3b0b7a0e6f5" alt="Tokyo Modern">
+            <div class="card-content">
+              <span class="tag">Tokyo</span>
+              <h3>Tokyo Modern Districts Tour</h3>
+              <div class="meta">Half Day · Modern · Shopping</div>
+              <div class="card-footer">
+                <div class="price">From ¥12,000</div>
+                <div><button class="view-btn" onclick="openModal('Tokyo Modern Districts Tour','Explore Odaiba, Akihabara and Ginza with private vehicle and door-to-door service.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- MOUNT FUJI -->
+          <article class="card tour-card" data-area="MountFuji" data-attractions="MountFuji5,LakeKawaguchi,Chureito" data-service="FullDay,Private">
+            <img src="https://images.unsplash.com/photo-1508261304307-4b9075a2a3e6?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=7a6f0d0f1a0e1b2a8c2e9a5c7a8f2e2c" alt="Mount Fuji 5th">
+            <div class="card-content">
+              <span class="tag">Mount Fuji</span>
+              <h3>Mount Fuji & Lake Kawaguchiko Tour</h3>
+              <div class="meta">Full Day · Scenic · Private</div>
+              <div class="card-footer">
+                <div class="price">From ¥28,000</div>
+                <div><button class="view-btn" onclick="openModal('Mount Fuji & Lake Kawaguchiko Tour','Pickup -> Mount Fuji 5th Station -> Lake Kawaguchiko -> Oshino Hakkai. Private vehicle & guide included.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tour-card" data-area="MountFuji" data-attractions="Oshino,Chureito" data-service="FullDay,Luxury">
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=8f8f1b2b4d5a3c6b7b9e1d2f3c4b0a1f" alt="Oshino Hakkai">
+            <div class="card-content">
+              <span class="tag">Mount Fuji</span>
+              <h3>Fuji Scenic & Cultural Tour</h3>
+              <div class="meta">Full Day · Culture · Luxury</div>
+              <div class="card-footer">
+                <div class="price">From ¥35,000</div>
+                <div><button class="view-btn" onclick="openModal('Fuji Scenic & Cultural Tour','Visit Oshino Hakkai, Chureito Pagoda and scenic view points. Luxury vehicle options available.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tour-card" data-area="MountFuji" data-attractions="GotembaOutlet,Chureito" data-service="FullDay,DayTrip">
+            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3a9f1a2b3c4d5e6f7a8b9c0d1e2f3a4b" alt="Gotemba Outlets">
+            <div class="card-content">
+              <span class="tag">Mount Fuji</span>
+              <h3>Fuji + Gotemba Shopping Tour</h3>
+              <div class="meta">Full Day · Shopping · Scenic</div>
+              <div class="card-footer">
+                <div class="price">From ¥22,000</div>
+                <div><button class="view-btn" onclick="openModal('Fuji + Gotemba Shopping Tour','Combine Fuji views with shopping at Gotemba Premium Outlets. Door-to-door pick up included.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- HAKONE -->
+          <article class="card tour-card" data-area="Hakone" data-attractions="LakeKawaguchi,LakeAsh,OpenAir" data-service="FullDay,Private">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=12f3f4a8e6b9c0d1e2f3a4b5c6d7e8f9" alt="Hakone Ashi">
+            <div class="card-content">
+              <span class="tag">Hakone</span>
+              <h3>Hakone Ropeway & Lake Ashi Tour</h3>
+              <div class="meta">Full Day · Scenic · Onsen optional</div>
+              <div class="card-footer">
+                <div class="price">From ¥24,000</div>
+                <div><button class="view-btn" onclick="openModal('Hakone Ropeway & Lake Ashi Tour','Cruise on Lake Ashi, take the Ropeway and visit Owakudani valley. Onsen add-on available.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tour-card" data-area="Hakone" data-attractions="OpenAir,HakoneShrine" data-service="FullDay,Private">
+            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=6a2d3b4c5d6e7f8a9b0c1d2e3f4a5b6c" alt="Hakone Museum">
+            <div class="card-content">
+              <span class="tag">Hakone</span>
+              <h3>Hakone Shrine & Cultural Tour</h3>
+              <div class="meta">Full Day · Culture · Art</div>
+              <div class="card-footer">
+                <div class="price">From ¥20,000</div>
+                <div><button class="view-btn" onclick="openModal('Hakone Shrine & Cultural Tour','Visit Hakone Shrine, Open Air Museum and local cultural spots. Private vehicle included.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tour-card" data-area="Hakone" data-attractions="MountFuji5,LakeAsh" data-service="FullDay,DayTrip">
+            <img src="https://images.unsplash.com/photo-1587502536263-3c9c9e1b1d84?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e" alt="Fuji & Hakone">
+            <div class="card-content">
+              <span class="tag">Hakone</span>
+              <h3>Fuji + Hakone Combo Tour</h3>
+              <div class="meta">Full Day · Scenic · Combo</div>
+              <div class="card-footer">
+                <div class="price">From ¥38,000</div>
+                <div><button class="view-btn" onclick="openModal('Fuji + Hakone Combo Tour','A full day combining Mount Fuji viewpoints and Hakone highlights. Private door-to-door service.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- NIKKO -->
+          <article class="card tour-card" data-area="Nikko" data-attractions="Toshogu,Kegon" data-service="FullDay,Private">
+            <img src="https://images.unsplash.com/photo-1526481280698-0b1f809f2b6a?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=1f9c1f39d6f2f8f3dde8c3b0b7a0e6f5" alt="Nikko">
+            <div class="card-content">
+              <span class="tag">Nikko</span>
+              <h3>Nikko Heritage Tour</h3>
+              <div class="meta">Full Day · Cultural · Nature</div>
+              <div class="card-footer">
+                <div class="price">From ¥26,000</div>
+                <div><button class="view-btn" onclick="openModal('Nikko Heritage Tour','Visit Toshogu Shrine, Kegon Falls and Lake Chuzenji with a private guide and vehicle.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tour-card" data-area="Nikko" data-attractions="Chuzenji,Kegon" data-service="FullDay,DayTrip">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b" alt="Kegon Falls">
+            <div class="card-content">
+              <span class="tag">Nikko</span>
+              <h3>Nikko Lake & Waterfall Tour</h3>
+              <div class="meta">Full Day · Nature · Photography</div>
+              <div class="card-footer">
+                <div class="price">From ¥24,000</div>
+                <div><button class="view-btn" onclick="openModal('Nikko Lake & Waterfall Tour','Lake Chuzenji and Kegon Falls with private transport and guide.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tour-card" data-area="Nikko" data-attractions="Trails,Forest" data-service="FullDay,Private">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=0f1e2d3c4b5a6d7e8c9f0a1b2c3d4e5f" alt="Nikko Trails">
+            <div class="card-content">
+              <span class="tag">Nikko</span>
+              <h3>Nikko Nature Day Trip</h3>
+              <div class="meta">Full Day · Hiking · Private</div>
+              <div class="card-footer">
+                <div class="price">From ¥23,000</div>
+                <div><button class="view-btn" onclick="openModal('Nikko Nature Day Trip','Forest trails, scenic viewpoints and local spots. Ideal for nature lovers.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- GOTEMBA -->
+          <article class="card tour-card" data-area="Gotemba" data-attractions="GotembaOutlet" data-service="FullDay,Shopping">
+            <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=9b8a7c6d5e4f3a2b1c0d9e8f7a6b5c4d" alt="Gotemba Outlet">
+            <div class="card-content">
+              <span class="tag">Gotemba</span>
+              <h3>Gotemba Outlet Shopping Tour</h3>
+              <div class="meta">Full Day · Shopping · Private</div>
+              <div class="card-footer">
+                <div class="price">From ¥10,000</div>
+                <div><button class="view-btn" onclick="openModal('Gotemba Outlet Shopping Tour','Direct pickup to Gotemba Premium Outlets with flexible shopping time. Driver assists with luggage.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tour-card" data-area="Gotemba" data-attractions="PeacePark,FujiView" data-service="HalfDay,Private">
+            <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=1234abcd5678ef90123456789abcdef0" alt="Gotemba Peace">
+            <div class="card-content">
+              <span class="tag">Gotemba</span>
+              <h3>Gotemba Peace Park Tour</h3>
+              <div class="meta">Half Day · Scenic · Relax</div>
+              <div class="card-footer">
+                <div class="price">From ¥8,500</div>
+                <div><button class="view-btn" onclick="openModal('Gotemba Peace Park Tour','Half-day visit to Peace Park and nearby Fuji viewpoints. Perfect for photography.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tour-card" data-area="Gotemba" data-attractions="GotembaOutlet,FujiView" data-service="FullDay,DayTrip">
+            <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef1234567890abcdef1234567890" alt="Gotemba & Fuji">
+            <div class="card-content">
+              <span class="tag">Gotemba</span>
+              <h3>Gotemba + Fuji Scenic Tour</h3>
+              <div class="meta">Full Day · Combo · Shopping</div>
+              <div class="card-footer">
+                <div class="price">From ¥18,000</div>
+                <div><button class="view-btn" onclick="openModal('Gotemba + Fuji Scenic Tour','Combined shopping and Fuji viewpoint stops with private vehicle and guide.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- NAGANO -->
+          <article class="card tour-card" data-area="Nagano" data-attractions="SnowMonkey,Zenkoji" data-service="FullDay,Private">
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=99aabbccddeeff001122334455667788" alt="Snow Monkey Park">
+            <div class="card-content">
+              <span class="tag">Nagano</span>
+              <h3>Snow Monkey Park Tour</h3>
+              <div class="meta">Full Day · Winter · Wildlife</div>
+              <div class="card-footer">
+                <div class="price">From ¥30,000</div>
+                <div><button class="view-btn" onclick="openModal('Snow Monkey Park Tour','Visit Jigokudani Snow Monkey Park and Zenkoji Temple with private transport.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tour-card" data-area="Nagano" data-attractions="Zenkoji" data-service="FullDay,Heritage">
+            <img src="https://images.unsplash.com/photo-1549888834-6b0f07f6a5f3?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=feedfacecafebeef0011223344556677" alt="Zenkoji">
+            <div class="card-content">
+              <span class="tag">Nagano</span>
+              <h3>Nagano Heritage Tour</h3>
+              <div class="meta">Full Day · Temple · Culture</div>
+              <div class="card-footer">
+                <div class="price">From ¥20,000</div>
+                <div><button class="view-btn" onclick="openModal('Nagano Heritage Tour','Zenkoji Temple visit, local markets and scenic drives included.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tour-card" data-area="Nagano" data-attractions="Mountains,Trails" data-service="FullDay,Adventure">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=badc0ffee0ddf00dfeed123456789abc" alt="Nagano Mountains">
+            <div class="card-content">
+              <span class="tag">Nagano</span>
+              <h3>Nagano Mountains & Nature Tour</h3>
+              <div class="meta">Full Day · Hiking · Scenic</div>
+              <div class="card-footer">
+                <div class="price">From ¥22,000</div>
+                <div><button class="view-btn" onclick="openModal('Nagano Mountains & Nature Tour','Explore mountain viewpoints, light hikes and local villages. Private transport.')">View Details</button></div>
+              </div>
+            </div>
+          </article>
+
+        </div> <!-- end grid -->
+      </section>
+    </div> <!-- end page -->
+  </div> <!-- end container -->
+
+  <!-- Vehicles -->
+  <div class="container" id="vehicles" style="margin-top:28px">
+    <div class="section-title">
+      <h2>Our Vehicle Fleet</h2>
+      <div class="muted">Choose a vehicle type that matches your group size and comfort needs.</div>
+    </div>
+
+    <div class="vehicles">
+      <div class="vcard">
+        <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=400&h=300&fit=crop&auto=format" alt="Mercedes">
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">Mercedes / Toyota Crown</div>
+          <div class="muted">3 seats — VIP / Couples / Airport Transfer</div>
+        </div>
+      </div>
+
+      <div class="vcard">
+        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=400&h=300&fit=crop&auto=format" alt="Land Cruiser">
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">Toyota Land Cruiser</div>
+          <div class="muted">4 seats — Family / Mountain roads</div>
+        </div>
+      </div>
+
+      <div class="vcard">
+        <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=400&h=300&fit=crop&auto=format" alt="Alphard">
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">Toyota Alphard / Vellfire</div>
+          <div class="muted">6 seats — Luxury family van</div>
+        </div>
+      </div>
+
+      <div class="vcard">
+        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=400&h=300&fit=crop&auto=format" alt="HiAce">
+        <div>
+          <div style="font-weight:700;margin-bottom:4px">Toyota HiAce</div>
+          <div class="muted">9 seats — Group travel / Corporate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attractions -->
+  <div class="container" id="attractions" style="margin-top:28px">
+    <div class="section-title">
+      <h2>Attractions by Area</h2>
+      <div class="muted">Click an area to view popular attractions we include in tours.</div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px">
+      <button class="btn outline" onclick="showAreaAttractions('Tokyo')">Tokyo</button>
+      <button class="btn outline" onclick="showAreaAttractions('MountFuji')">Mount Fuji</button>
+      <button class="btn outline" onclick="showAreaAttractions('Hakone')">Hakone</button>
+      <button class="btn outline" onclick="showAreaAttractions('Nikko')">Nikko</button>
+      <button class="btn outline" onclick="showAreaAttractions('Gotemba')">Gotemba</button>
+      <button class="btn outline" onclick="showAreaAttractions('Nagano')">Nagano</button>
+    </div>
+
+    <div id="areaAttractions" style="margin-top:12px">
+      <!-- dynamic content -->
+      <div class="attr-card" id="attr-default">Select an area to view attractions.</div>
+    </div>
+  </div>
+
+  <!-- Reservation Form -->
+  <div class="container" id="reservation">
+    <div class="section-title" style="margin-top:28px">
+      <h2>Online Reservation</h2>
+      <div class="muted">Fill the form below to request your booking. We will confirm availability & send a final quote.</div>
+    </div>
+
+    <div class="form-card">
+      <form id="reservationForm" onsubmit="handleReserve(event)">
+        <div class="form-grid">
+          <div>
+            <label class="muted">Full Name *</label>
+            <input type="text" id="r_name" required placeholder="Your full name">
+          </div>
+          <div>
+            <label class="muted">Phone Number (WhatsApp preferred) *</label>
+            <input type="text" id="r_phone" required placeholder="+81 90 1234 5678">
+          </div>
+
+          <div>
+            <label class="muted">Email Address *</label>
+            <input type="text" id="r_email" required placeholder="name@example.com">
+          </div>
+
+          <div>
+            <label class="muted">Number of Passengers</label>
+            <input type="text" id="r_passengers" placeholder="e.g. 2">
+          </div>
+
+          <div>
+            <label class="muted">Pickup Date *</label>
+            <input type="date" id="r_date" required>
+          </div>
+
+          <div>
+            <label class="muted">Pickup Time *</label>
+            <input type="time" id="r_time" required>
+          </div>
+
+          <div class="full">
+            <label class="muted">Pickup Address *</label>
+            <input type="text" id="r_pickup" required placeholder="Hotel name / airport / address">
+          </div>
+
+          <div class="full">
+            <label class="muted">Selected Tour *</label>
+            <select id="r_tour" required>
+              <option value="">Select a tour</option>
+              <option>Tokyo City Highlights Tour</option>
+              <option>Tokyo Cultural & Heritage Tour</option>
+              <option>Tokyo Modern Districts Tour</option>
+              <option>Mount Fuji & Lake Kawaguchiko Tour</option>
+              <option>Fuji Scenic & Cultural Tour</option>
+              <option>Fuji + Gotemba Shopping Tour</option>
+              <option>Hakone Ropeway & Lake Ashi Tour</option>
+              <option>Hakone Shrine & Cultural Tour</option>
+              <option>Fuji + Hakone Combo Tour</option>
+              <option>Nikko Heritage Tour</option>
+              <option>Nikko Lake & Waterfall Tour</option>
+              <option>Gotemba Outlet Shopping Tour</option>
+              <option>Snow Monkey Park Tour</option>
+              <option>Nagano Heritage Tour</option>
+            </select>
+          </div>
+
+          <div class="full">
+            <label class="muted">Drop-off Address *</label>
+            <input type="text" id="r_dropoff" required placeholder="Hotel / location">
+          </div>
+
+          <div>
+            <label class="muted">Preferred Vehicle (optional)</label>
+            <select id="r_vehicle">
+              <option value="">No preference</option>
+              <option>Mercedes / Crown (3 seats)</option>
+              <option>Land Cruiser (4 seats)</option>
+              <option>Alphard / Vellfire (6 seats)</option>
+              <option>HiAce (9 seats)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="muted">Luggage Count</label>
+            <input type="text" id="r_luggage" placeholder="e.g. 2 large + 1 small">
+          </div>
+
+          <div class="full">
+            <label class="muted">Special Requests / Notes</label>
+            <textarea id="r_notes" placeholder="Child seat, dietary requirements, accessibility, etc."></textarea>
+          </div>
+
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <button type="submit" class="submit">Confirm Reservation</button>
+          <div class="muted">We will contact you within 24 hours to confirm booking & price.</div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="container" id="contact" style="margin-top:28px;margin-bottom:46px">
+    <div class="section-title">
+      <h2>Contact Us</h2>
+      <div class="muted">Questions? Reach out on WhatsApp or send us a message.</div>
+    </div>
+
+    <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:12px">
+      <div style="flex:1;min-width:260px;background:#fff;padding:12px;border-radius:10px;box-shadow:var(--shadow)">
+        <h4>Contact Info</h4>
+        <p class="muted">Phone / WhatsApp: +81 90 1234 5678</p>
+        <p class="muted">Email: info@karvaantours.com</p>
+        <p class="muted">Support Hours: 08:00 - 20:00 JST</p>
+      </div>
+
+      <div style="flex:2;min-width:300px;background:#fff;padding:12px;border-radius:10px;box-shadow:var(--shadow)">
+        <h4>Send a message</h4>
+        <form onsubmit="event.preventDefault(); alert('Thank you — message sent (demo).');">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input style="flex:1;padding:10px;border-radius:8px;border:1px solid #E6E9EE" placeholder="Name" required>
+            <input style="flex:1;padding:10px;border-radius:8px;border:1px solid #E6E9EE" placeholder="Email" required>
+          </div>
+          <textarea style="width:100%;margin-top:8px;border-radius:8px;border:1px solid #E6E9EE" placeholder="Your message" required></textarea>
+          <div style="margin-top:8px"><button class="submit">Send Message</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer style="background:#fff;border-top:1px solid #E6E9EE;padding:18px 0">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;gap:12px;align-items:center">
+        <img src="https://images.unsplash.com/photo-1549693578-d683be217e58?w=48&h=40&fit=crop&auto=format" alt="logo" style="height:40px">
+        <div>
+          <div style="font-weight:700">Karvaan Tours</div>
+          <div class="muted">Private Door-to-Door Tours in Japan</div>
+        </div>
+      </div>
+
+      <div class="muted">© Karvaan Tours — All Rights Reserved</div>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <a class="muted" href="#privacy">Privacy</a>
+        <a class="muted" href="#terms">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-box" id="modalBox">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+        <h3 id="modalTitle">Tour Title</h3>
+        <button class="close-btn" onclick="closeModal()">Close</button>
+      </div>
+      <div id="modalContent" style="margin-top:8px;color:var(--muted)"></div>
+      <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn outline" onclick="closeModal()">Close</button>
+        <button class="btn primary" onclick="scrollToReservation()">Reserve This Tour</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  // Basic filter logic
+  const tourCards = Array.from(document.querySelectorAll('.tour-card'));
+  const areaSelect = document.getElementById('filter-area');
+  const attractionSelect = document.getElementById('filter-attraction');
+  const serviceSelect = document.getElementById('filter-service');
+  const searchBtn = document.getElementById('searchBtn');
+
+  function normalize(val){ return (val||'').toString().trim(); }
+
+  function applyFilters(){
+    const areaVal = normalize(areaSelect.value);
+    const attrVal = normalize(attractionSelect.value);
+    const serviceVal = normalize(serviceSelect.value);
+
+    // Also consider checkboxes in sidebar
+    const checkedAreas = Array.from(document.querySelectorAll('.area-checkbox:checked')).map(i=>i.value);
+    const checkedAttractions = Array.from(document.querySelectorAll('.attraction-checkbox:checked')).map(i=>i.value);
+    const checkedServices = Array.from(document.querySelectorAll('.service-checkbox:checked')).map(i=>i.value);
+
+    tourCards.forEach(card=>{
+      const area = card.getAttribute('data-area') || '';
+      const attractions = (card.getAttribute('data-attractions')||'').split(',').map(s=>s.trim());
+      const services = (card.getAttribute('data-service')||'').split(',').map(s=>s.trim());
+
+      let visible = true;
+
+      if(areaVal) visible = visible && (area.toLowerCase().includes(areaVal.toLowerCase()) || areaVal.toLowerCase().includes(area.toLowerCase()));
+      if(attrVal) visible = visible && attractions.some(a=>a.toLowerCase().includes(attrVal.toLowerCase()));
+      if(serviceVal) visible = visible && services.some(s=>s.toLowerCase().includes(serviceVal.toLowerCase()));
+
+      if(checkedAreas.length) visible = visible && checkedAreas.includes(area);
+      if(checkedAttractions.length) visible = visible && checkedAttractions.some(ca => attractions.includes(ca));
+      if(checkedServices.length) visible = visible && checkedServices.some(cs => services.includes(cs));
+
+      card.style.display = visible ? '' : 'none';
+    });
+  }
+
+  searchBtn.addEventListener('click', applyFilters);
+  areaSelect.addEventListener('change', applyFilters);
+  attractionSelect.addEventListener('change', applyFilters);
+  serviceSelect.addEventListener('change', applyFilters);
+
+  // checkbox filters
+  document.querySelectorAll('.area-checkbox, .attraction-checkbox, .service-checkbox').forEach(ch=>{
+    ch.addEventListener('change', applyFilters);
+  });
+
+  function resetFilters(){
+    areaSelect.value = '';
+    attractionSelect.value = '';
+    serviceSelect.value = '';
+    document.querySelectorAll('.area-checkbox, .attraction-checkbox, .service-checkbox').forEach(c => c.checked = false);
+    applyFilters();
+  }
+
+  // Modal logic
+  function openModal(title, content){
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalContent').innerText = content;
+    document.getElementById('modal').classList.add('show');
+  }
+  function closeModal(){ document.getElementById('modal').classList.remove('show'); }
+  function scrollToReservation(){ closeModal(); document.getElementById('reservation').scrollIntoView({behavior:'smooth'}); }
+
+  // Attractions by area
+  const attractions = {
+    Tokyo: ["Tokyo Tower","Shibuya Crossing","Senso-ji Temple","Meiji Shrine","Imperial Palace","Odaiba","Ueno Park","Tokyo Skytree","Akihabara","Ginza"],
+    MountFuji: ["Mount Fuji 5th Station","Lake Kawaguchiko","Oshino Hakkai","Chureito Pagoda","Gotemba Premium Outlets","Fuji Panoramic Ropeway","Aokigahara Forest"],
+    Hakone: ["Hakone Shrine","Lake Ashi","Hakone Ropeway","Owakudani Valley","Hakone Open-Air Museum","Onsen Resorts"],
+    Nikko: ["Toshogu Shrine","Kegon Falls","Lake Chuzenji","Nikko National Park"],
+    Gotemba: ["Gotemba Premium Outlets","Peace Park","Fuji viewpoints","Local food streets"],
+    Nagano: ["Jigokudani Snow Monkey Park","Zenkoji Temple","Nagano Mountains","Togakushi Shrine"]
+  };
+
+  // Attraction images mapping with better Unsplash URLs
+  const attractionImages = {
+    "Tokyo Tower": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&h=400&fit=crop&auto=format",
+    "Shibuya Crossing": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600&h=400&fit=crop&auto=format",
+    "Senso-ji Temple": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=400&fit=crop&auto=format",
+    "Meiji Shrine": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=400&fit=crop&auto=format",
+    "Imperial Palace": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600&h=400&fit=crop&auto=format",
+    "Odaiba": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600&h=400&fit=crop&auto=format",
+    "Ueno Park": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=400&fit=crop&auto=format",
+    "Tokyo Skytree": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600&h=400&fit=crop&auto=format",
+    "Akihabara": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600&h=400&fit=crop&auto=format",
+    "Ginza": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600&h=400&fit=crop&auto=format",
+    "Mount Fuji 5th Station": "https://images.unsplash.com/photo-1549693578-d683be217e58?w=600&h=400&fit=crop&auto=format",
+    "Lake Kawaguchiko": "https://images.unsplash.com/photo-1508261304307-4b9075a2a3e6?w=600&h=400&fit=crop&auto=format",
+    "Oshino Hakkai": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&h=400&fit=crop&auto=format",
+    "Chureito Pagoda": "https://images.unsplash.com/photo-1508261304307-4b9075a2a3e6?w=600&h=400&fit=crop&auto=format",
+    "Gotemba Premium Outlets": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&h=400&fit=crop&auto=format",
+    "Fuji Panoramic Ropeway": "https://images.unsplash.com/photo-1508261304307-4b9075a2a3e6?w=600&h=400&fit=crop&auto=format",
+    "Aokigahara Forest": "https://images.unsplash.com/photo-1508261304307-4b9075a2a3e6?w=600&h=400&fit=crop&auto=format",
+    "Hakone Shrine": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop&auto=format",
+    "Lake Ashi": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop&auto=format",
+    "Hakone Ropeway": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop&auto=format",
+    "Owakudani Valley": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop&auto=format",
+    "Hakone Open-Air Museum": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=600&h=400&fit=crop&auto=format",
+    "Onsen Resorts": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop&auto=format",
+    "Toshogu Shrine": "https://images.unsplash.com/photo-1526481280698-0b1f809f2b6a?w=600&h=400&fit=crop&auto=format",
+    "Kegon Falls": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&h=400&fit=crop&auto=format",
+    "Lake Chuzenji": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&h=400&fit=crop&auto=format",
+    "Nikko National Park": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop&auto=format",
+    "Peace Park": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&h=400&fit=crop&auto=format",
+    "Fuji viewpoints": "https://images.unsplash.com/photo-1508261304307-4b9075a2a3e6?w=600&h=400&fit=crop&auto=format",
+    "Local food streets": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&h=400&fit=crop&auto=format",
+    "Jigokudani Snow Monkey Park": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&h=400&fit=crop&auto=format",
+    "Zenkoji Temple": "https://images.unsplash.com/photo-1549888834-6b0f07f6a5f3?w=600&h=400&fit=crop&auto=format",
+    "Nagano Mountains": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=400&fit=crop&auto=format",
+    "Togakushi Shrine": "https://images.unsplash.com/photo-1549888834-6b0f07f6a5f3?w=600&h=400&fit=crop&auto=format"
+  };
+
+  function showAreaAttractions(area){
+    const list = attractions[area] || [];
+    const container = document.getElementById('areaAttractions');
+    container.innerHTML = '';
+    if(!list.length){ 
+      container.innerHTML = '<div class="attr-card"><div class="attr-card-content">No attractions listed.</div></div>'; 
+      return; 
+    }
+    const grid = document.createElement('div');
+    grid.className = 'attractions-grid';
+    list.forEach(a=>{
+      const card = document.createElement('div'); 
+      card.className='attr-card';
+      const imgUrl = attractionImages[a] || "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=400&fit=crop&auto=format";
+      card.innerHTML = `
+        <img src="${imgUrl}" alt="${a}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=400&fit=crop&auto=format'">
+        <div class="attr-card-content">
+          <strong style="display:block;margin-bottom:6px;font-size:16px;color:#041324">${a}</strong>
+          <div class="muted">Included in selected tours for ${area}.</div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+    container.appendChild(grid);
+  }
+
+  // Reservation form handling (demo)
+  function handleReserve(e){
+    e.preventDefault();
+    const name = document.getElementById('r_name').value.trim();
+    const phone = document.getElementById('r_phone').value.trim();
+    const email = document.getElementById('r_email').value.trim();
+    const date = document.getElementById('r_date').value;
+    const time = document.getElementById('r_time').value;
+    const pickup = document.getElementById('r_pickup').value.trim();
+    const tour = document.getElementById('r_tour').value;
+
+    if(!name || !phone || !email || !date || !time || !pickup || !tour){
+      alert('Please fill all mandatory fields.');
+      return;
+    }
+
+    // Demo behavior: show confirmation (in production: send to server / API)
+    alert('Thank you, ' + name + '! Your reservation request for "'+ tour +'" on '+ date + ' at ' + time + ' has been received. We will contact you shortly on ' + phone + '.');
+
+    // Reset form (or keep values depending on UX)
+    document.getElementById('reservationForm').reset();
+  }
+
+  // Init: show default attractions
+  const attrDefault = document.getElementById('attr-default');
+  if(attrDefault) {
+    attrDefault.className = 'attr-card';
+    attrDefault.innerHTML = '<div class="attr-card-content">Select an area to view attractions. Or use the filters to find tours.</div>';
+  }
+  applyFilters();
+</script>
+</body>
+</html>
+
+
